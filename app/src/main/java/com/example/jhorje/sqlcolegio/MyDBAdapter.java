@@ -6,6 +6,7 @@ package com.example.jhorje.sqlcolegio;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -20,8 +21,8 @@ public class MyDBAdapter {
 
     // Definiciones y constantes
     private static final String DATABASE_NAME = "dbCole.db";
-    private static final String DATABASE_TABLE_ESTUDIANTES = "estudiante";
-    private static final String DATABASE_TABLE_PROFESORES = "estudiante";
+    private static final String DATABASE_TABLE_ESTUDIANTES = "estudiantes";
+    private static final String DATABASE_TABLE_PROFESORES = "profesores";
     private static final int DATABASE_VERSION = 1;
 
     //Campos
@@ -88,6 +89,20 @@ public class MyDBAdapter {
 
         //Insertamos valores
         db.insert(DATABASE_TABLE_PROFESORES,null,nuevoReg);
+    }
+
+    public int contarRegistrosEstudiantes(){
+        Cursor cursorEstudiantes = db.query(DATABASE_TABLE_ESTUDIANTES,null,null,null,null,null,null);
+        int totalEstudiantes = cursorEstudiantes.getCount();
+
+        return totalEstudiantes;
+    }
+
+    public int contarRegistrosProfesores(){
+        Cursor cursosProfesores = db.query(DATABASE_TABLE_PROFESORES,null,null,null,null,null,null);
+        int totalProfesores = cursosProfesores.getCount();
+
+        return totalProfesores;
     }
 
     public void eliminarEstudiante(int id){
