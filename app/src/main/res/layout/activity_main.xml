@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:onClick="onClick"
+        android:backgroundTint="@android:color/holo_green_light"
         android:clickable="true"
-        android:backgroundTint="@android:color/holo_green_dark"
+        android:onClick="onClick"
         android:text="Añadir" />
 
     <Button
