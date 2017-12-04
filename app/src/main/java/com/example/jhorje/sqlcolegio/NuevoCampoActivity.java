@@ -47,7 +47,6 @@ public class NuevoCampoActivity extends AppCompatActivity {
 
         //Cargamos Base de datos SQLite
         dbAdapter = new MyDBAdapter(this);
-        dbAdapter.open();
 
         //Radio Buttons
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -99,8 +98,9 @@ public class NuevoCampoActivity extends AppCompatActivity {
         //Creamos objeto estudiante
         Profesor nuevoProfesor = new Profesor(nombre,edad,ciclo,curso,despacho);
 
-        //TODO Crear metodo insertarProfesor
-        //dbAdapter.insertarEstudiante(nuevoEstudiante);
+        dbAdapter.open();
+        dbAdapter.insertarProfesor(nuevoProfesor);
+        dbAdapter.close();
 
         Toast.makeText(getApplicationContext(),"Nuevo profesor generado",Toast.LENGTH_LONG).show();
     }
@@ -116,7 +116,9 @@ public class NuevoCampoActivity extends AppCompatActivity {
         //Creamos objeto estudiante
         Estudiante nuevoEstudiante = new Estudiante(nombre,edad,ciclo,curso,nota);
 
+        dbAdapter.open();
         dbAdapter.insertarEstudiante(nuevoEstudiante);
+        dbAdapter.close();
 
         Toast.makeText(getApplicationContext(),"Nuevo estudiante generado",Toast.LENGTH_LONG).show();
     }

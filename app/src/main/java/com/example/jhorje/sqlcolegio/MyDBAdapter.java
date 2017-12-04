@@ -7,9 +7,11 @@ package com.example.jhorje.sqlcolegio;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.jhorje.sqlcolegio.Objetos.Estudiante;
 import com.example.jhorje.sqlcolegio.Objetos.Profesor;
@@ -23,7 +25,7 @@ public class MyDBAdapter {
     private static final String DATABASE_NAME = "dbCole.db";
     private static final String DATABASE_TABLE_ESTUDIANTES = "estudiantes";
     private static final String DATABASE_TABLE_PROFESORES = "profesores";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     //Campos
     private static final String NOMBRE = "nombre";
@@ -34,9 +36,11 @@ public class MyDBAdapter {
     private static final String DESPACHO = "despacho";
 
     //Orden SQL
-    private static final String DATABASE_CREATE = "CREATE TABLE "+DATABASE_TABLE_ESTUDIANTES+" (id integer primary key autoincrement, nombre text,edad integer, ciclo text, curso text, nota float); " +
-            "CREATE TABLE "+DATABASE_TABLE_PROFESORES+" (id integer primary key autoincrement, nombre text,edad integer, ciclo text, curso text, despacho text);";
-    private static final String DATABASE_DROP = "DROP TABLE IF EXISTS "+DATABASE_TABLE_ESTUDIANTES+"; DROP TABLE IF EXISTS "+DATABASE_TABLE_PROFESORES+";";
+    private static final String DATABASE_CREATE = "CREATE TABLE "+DATABASE_TABLE_ESTUDIANTES+" (id integer primary key autoincrement, nombre text,edad integer, ciclo text, curso text, nota float); ";
+    private static final String DATABASE_PROFESORES = "CREATE TABLE "+DATABASE_TABLE_PROFESORES+" (id integer primary key autoincrement, nombre text,edad integer, ciclo text, curso text, despacho text);";
+    private static final String DATABASE_DROP = "DROP DATABASE " + DATABASE_NAME + ";";
+    private static final String DATABASE_DROP_ESTUDIANTES = "DROP TABLE IF EXISTS "+DATABASE_TABLE_ESTUDIANTES+";";
+    private static final String DATABASE_DROP_PROFESORES = "DROP TABLE IF EXISTS "+DATABASE_TABLE_PROFESORES+";";
 
     // Contexto de la aplicación que usa la base de datos
     private final Context context;
@@ -48,7 +52,6 @@ public class MyDBAdapter {
     public MyDBAdapter (Context c){
         context = c;
         dbHelper = new MyDbHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //OJO open();
     }
 
     public void open(){
@@ -57,15 +60,20 @@ public class MyDBAdapter {
             db = dbHelper.getWritableDatabase();
         }catch(SQLiteException e){
             db = dbHelper.getReadableDatabase();
+            Log.d("#TEMP","No iva tio!");
         }
 
+    }
+
+    public void close(){
+        db.close();
     }
 
     public void insertarEstudiante(Estudiante estudiante){
         //Creamos registro
         ContentValues nuevoReg = new ContentValues();
 
-        //Asignar campos
+        //Asignamos campos
         nuevoReg.put(NOMBRE,estudiante.getNombre());
         nuevoReg.put(EDAD,estudiante.getEdad());
         nuevoReg.put(CICLO,estudiante.getCiclo());
@@ -92,14 +100,14 @@ public class MyDBAdapter {
     }
 
     public int contarRegistrosEstudiantes(){
-        Cursor cursorEstudiantes = db.query(DATABASE_TABLE_ESTUDIANTES,null,null,null,null,null,null);
+        Cursor cursorEstudiantes = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_ESTUDIANTES + ";",null);
         int totalEstudiantes = cursorEstudiantes.getCount();
 
         return totalEstudiantes;
     }
 
     public int contarRegistrosProfesores(){
-        Cursor cursosProfesores = db.query(DATABASE_TABLE_PROFESORES,null,null,null,null,null,null);
+        Cursor cursosProfesores = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_PROFESORES + ";",null);
         int totalProfesores = cursosProfesores.getCount();
 
         return totalProfesores;
@@ -114,7 +122,7 @@ public class MyDBAdapter {
     }
 
     public void eliminarBBDD() {
-        db.execSQL(DATABASE_DROP);
+        context.deleteDatabase(DATABASE_NAME);
     }
 
     private static class MyDbHelper extends SQLiteOpenHelper {
@@ -125,12 +133,15 @@ public class MyDBAdapter {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
+            Log.d("#TEMP",DATABASE_CREATE);
             db.execSQL(DATABASE_CREATE);
+            db.execSQL(DATABASE_PROFESORES);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL(DATABASE_DROP);
+            db.execSQL(DATABASE_DROP_ESTUDIANTES);
+            db.execSQL(DATABASE_DROP_PROFESORES);
             onCreate(db);
         }
 
