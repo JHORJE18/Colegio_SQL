@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.jhorje.sqlcolegio.Objetos.Estudiante;
 import com.example.jhorje.sqlcolegio.Objetos.Profesor;
@@ -135,6 +136,27 @@ public class MyDBAdapter {
         return todosEstudiantes;
     }
 
+    public ArrayList<Estudiante> filtroEstudiantes(String filtros){
+        Cursor cursorEstudiantes = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_ESTUDIANTES + filtros + ";",null);
+        ArrayList<Estudiante> todosEstudiantes = new ArrayList<Estudiante>();
+
+        if (cursorEstudiantes.moveToFirst()) {
+            do {
+                String nombre = cursorEstudiantes.getString(1);
+                int edad = cursorEstudiantes.getInt(2);
+                String ciclo = cursorEstudiantes.getString(3);
+                String curso = cursorEstudiantes.getString(4);
+                float nota = cursorEstudiantes.getFloat(5);
+
+                Estudiante nuevo = new Estudiante(nombre,edad,ciclo,curso,nota);
+                todosEstudiantes.add(nuevo);
+            } while (cursorEstudiantes.moveToNext());
+        }
+        Toast.makeText(context.getApplicationContext(),"SQL: " + "SELECT * FROM " + DATABASE_TABLE_ESTUDIANTES + filtros + ";", Toast.LENGTH_LONG).show();
+
+        return todosEstudiantes;
+    }
+
     public ArrayList<Profesor> llenarProfesores(){
         Cursor cursorEstudiantes = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_PROFESORES + ";",null);
         ArrayList<Profesor> todosEstudiantes = new ArrayList<Profesor>();
@@ -153,6 +175,27 @@ public class MyDBAdapter {
         }
 
         return todosEstudiantes;
+    }
+
+    public ArrayList<Profesor> filtroProfesores(String filtros){
+        Cursor cursorProfesores = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_PROFESORES + filtros + ";",null);
+        ArrayList<Profesor> todoProfesores = new ArrayList<Profesor>();
+
+        if (cursorProfesores.moveToFirst()) {
+            do {
+                String nombre = cursorProfesores.getString(1);
+                int edad = cursorProfesores.getInt(2);
+                String ciclo = cursorProfesores.getString(3);
+                String curso = cursorProfesores.getString(4);
+                String despacho = cursorProfesores.getString(5);
+
+                Profesor nuevo = new Profesor(nombre,edad,ciclo,curso,despacho);
+                todoProfesores.add(nuevo);
+            } while (cursorProfesores.moveToNext());
+        }
+        Toast.makeText(context.getApplicationContext(),"SQL: " + "SELECT * FROM " + DATABASE_TABLE_ESTUDIANTES + filtros + ";", Toast.LENGTH_LONG).show();
+
+        return todoProfesores;
     }
 
     public void eliminarEstudiante(int id){

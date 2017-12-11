@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Nombre:"
-        android:inputType="textPersonName" />
+        android:inputType="textCapWords|textPersonName" />
 
     <EditText
         android:id="@+id/editEdad"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Ciclo:"
-        android:inputType="textPersonName" />
+        android:inputType="textCapCharacters" />
 
     <EditText
         android:id="@+id/editCurso"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Curso:"
-        android:inputType="textCapWords" />
+        android:inputType="textCapCharacters" />
 
     <EditText
         android:id="@+id/editNota"

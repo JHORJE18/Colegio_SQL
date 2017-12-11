@@ -80,10 +80,10 @@ public class AdaptadorProfesores extends BaseAdapter {
 
         //Asignando valores
         txtNombre.setText(persona.getNombre());
-        txtEdad.setText(persona.getEdadString());
-        txtCiclo.setText(persona.getCiclo());
-        txtCurso.setText(persona.getCurso());
-        txtDespacho.setText(persona.getDespacho());
+        txtEdad.setText("Edad: "+persona.getEdadString());
+        txtCiclo.setText("Ciclo: "+persona.getCiclo());
+        txtCurso.setText("Curso: "+persona.getCurso());
+        txtDespacho.setText("Despacho: "+persona.getDespacho());
 
         return v;
     }

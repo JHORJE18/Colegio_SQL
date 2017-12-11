@@ -76,10 +76,14 @@ public class AdaptadorEstudiantes extends BaseAdapter {
 
         //Asignando valores
         txtNombre.setText(persona.getNombre());
-        txtEdad.setText(persona.getEdadString());
-        txtCiclo.setText(persona.getCiclo());
-        txtCurso.setText(persona.getCurso());
+        txtEdad.setText("Edad: " + persona.getEdadString());
+        txtCiclo.setText("Ciclo: "+persona.getCiclo());
+        txtCurso.setText("Curso: "+persona.getCurso());
         txtNota.setText(Float.toString(persona.getNota()));
+
+        if (persona.getNota() < 5f){
+            txtNota.setTextColor(R.color.error_color);
+        }
 
         return v;
     }

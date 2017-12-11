@@ -3,6 +3,7 @@ package com.example.jhorje.sqlcolegio;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -66,10 +67,29 @@ public class MostrarRegistrosActivity extends AppCompatActivity {
 
     private void recargarVista() {
         if (boxEstudiantes.isChecked()){
-            //cargarEstudiantes();
             listEstudiantes.setVisibility(View.VISIBLE);
 
-            estudiantes = dbAdapter.llenarEstudiantes();
+            String filtros = " WHERE ";
+            if (editCiclo.getText().toString().length() > 0){
+                filtros += "ciclo='" + editCiclo.getText().toString() + "'";
+            }
+
+            if (editCiclo.getText().toString().length() > 0 && editCurso.getText().toString().length() > 0){
+                filtros += " AND ";
+            }
+
+            if (editCurso.getText().toString().length() > 0){
+                filtros += "curso='" + editCurso.getText().toString() + "'";
+            }
+
+            //Evaluador FINAL de filtros
+            if (!filtros.equals(" WHERE ")){
+                //Se han modificado filtros
+                estudiantes = dbAdapter.filtroEstudiantes(filtros);
+            } else {
+                //No se han añadido filtros
+                estudiantes = dbAdapter.llenarEstudiantes();
+            }
 
             adapterE = new AdaptadorEstudiantes(this, estudiantes);
             listEstudiantes.setAdapter(adapterE);
@@ -78,10 +98,30 @@ public class MostrarRegistrosActivity extends AppCompatActivity {
         }
 
         if (boxProfesores.isChecked()){
-            //cargarProfesores();
             listProfesores.setVisibility(View.VISIBLE);
 
-            profesores = dbAdapter.llenarProfesores();
+            String filtros = " WHERE ";
+            if (editCiclo.getText().toString().length() > 0){
+                filtros += "ciclo='" + editCiclo.getText().toString() + "'";
+            }
+
+            if (editCiclo.getText().toString().length() > 0 && editCurso.getText().toString().length() > 0){
+                filtros += " AND ";
+            }
+
+            if (editCurso.getText().toString().length() > 0){
+                filtros += "curso='" + editCurso.getText().toString() + "'";
+            }
+
+            //Evaluador FINAL de filtros
+            if (!filtros.equals(" WHERE ")){
+                //Se han modificado filtros
+                profesores = dbAdapter.filtroProfesores(filtros);
+            } else {
+                //No se han añadido filtros
+                profesores = dbAdapter.llenarProfesores();
+            }
+
 
             adapterP = new AdaptadorProfesores(this, profesores);
             listProfesores.setAdapter(adapterP);
