@@ -60,4 +60,8 @@ public class Estudiante {
     public void setNota(float nota) {
         this.nota = nota;
     }
+
+    public String getEdadString(){
+        return String.valueOf(this.edad);
+    }
 }
