@@ -4,14 +4,19 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.jhorje.sqlcolegio.Objetos.Estudiante;
 
 public class EliminarCampoActivity extends AppCompatActivity {
 
@@ -73,6 +78,7 @@ public class EliminarCampoActivity extends AppCompatActivity {
                 refrescarVista();
             }
         });
+        refrescarVista();
     }
 
     public void onClick(View v){

@@ -152,7 +152,6 @@ public class MyDBAdapter {
                 todosEstudiantes.add(nuevo);
             } while (cursorEstudiantes.moveToNext());
         }
-        Toast.makeText(context.getApplicationContext(),"SQL: " + "SELECT * FROM " + DATABASE_TABLE_ESTUDIANTES + filtros + ";", Toast.LENGTH_LONG).show();
 
         return todosEstudiantes;
     }
@@ -193,7 +192,6 @@ public class MyDBAdapter {
                 todoProfesores.add(nuevo);
             } while (cursorProfesores.moveToNext());
         }
-        Toast.makeText(context.getApplicationContext(),"SQL: " + "SELECT * FROM " + DATABASE_TABLE_ESTUDIANTES + filtros + ";", Toast.LENGTH_LONG).show();
 
         return todoProfesores;
     }
