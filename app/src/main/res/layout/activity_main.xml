@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_green_light"
+            android:backgroundTint="@color/Verde"
             android:clickable="true"
             android:onClick="onClick"
             android:text="Añadir" />
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_orange_dark"
+            android:backgroundTint="@color/Amarillo"
             android:clickable="true"
             android:onClick="onClick"
             android:text="Recargar" />
@@ -47,33 +47,50 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtTitulo"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Total Registros:"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtCountEstudiantes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Estudiantes: 0"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Total Registros:"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtCountProfesores"
+        <TextView
+            android:id="@+id/txtCountProfesores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Profesores: 0"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtCountEstudiantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Estudiantes: 0"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRegistros"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Profesores: 0"
-        android:textSize="20sp" />
+        android:onClick="onClick"
+        android:clickable="true"
+        android:backgroundTint="?android:attr/actionMenuTextColor"
+        android:text="Mostrar registros" />
 
 </LinearLayout>

@@ -31,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         //Cargamos Base de datos SQLite
         dbAdapter = new MyDBAdapter(this);
         dbAdapter.open();
+        recargar();
+    }
+
+    @Override
+    protected void onResume() {
+        recargar();
+        super.onResume();
     }
 
     public void onClick(View v){
@@ -47,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent ventanaEliminar = new Intent(this, EliminarCampoActivity.class);
                 startActivity(ventanaEliminar);
                 break;
+            case R.id.btnRegistros:
+                Intent ventanaRegistros = new Intent(this, MostrarRegistrosActivity.class);
+                startActivity(ventanaRegistros);
+                break;
         }
     }
 
@@ -61,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         txtCountEstudiantes.setText("Estudiantes: " + estudiantes);
         int profesores = 0;
         try {
-            profesores = dbAdapter.contarRegistrosEstudiantes();
+            profesores = dbAdapter.contarRegistrosProfesores();
         }catch (Exception e){
             Log.w("#TEMP","Error primo!");
         }
