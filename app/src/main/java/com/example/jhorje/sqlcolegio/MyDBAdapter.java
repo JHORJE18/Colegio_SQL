@@ -16,6 +16,8 @@ import android.util.Log;
 import com.example.jhorje.sqlcolegio.Objetos.Estudiante;
 import com.example.jhorje.sqlcolegio.Objetos.Profesor;
 
+import java.util.ArrayList;
+
 /**
  * Created by jmalberola.
  */
@@ -111,6 +113,46 @@ public class MyDBAdapter {
         int totalProfesores = cursosProfesores.getCount();
 
         return totalProfesores;
+    }
+
+    public ArrayList<Estudiante> llenarEstudiantes(){
+        Cursor cursorEstudiantes = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_ESTUDIANTES + ";",null);
+        ArrayList<Estudiante> todosEstudiantes = new ArrayList<Estudiante>();
+
+        if (cursorEstudiantes.moveToFirst()) {
+            do {
+                String nombre = cursorEstudiantes.getString(1);
+                int edad = cursorEstudiantes.getInt(2);
+                String ciclo = cursorEstudiantes.getString(3);
+                String curso = cursorEstudiantes.getString(4);
+                float nota = cursorEstudiantes.getFloat(5);
+
+                Estudiante nuevo = new Estudiante(nombre,edad,ciclo,curso,nota);
+                todosEstudiantes.add(nuevo);
+            } while (cursorEstudiantes.moveToNext());
+        }
+
+        return todosEstudiantes;
+    }
+
+    public ArrayList<Profesor> llenarProfesores(){
+        Cursor cursorEstudiantes = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_PROFESORES + ";",null);
+        ArrayList<Profesor> todosEstudiantes = new ArrayList<Profesor>();
+
+        if (cursorEstudiantes.moveToFirst()) {
+            do {
+                String nombre = cursorEstudiantes.getString(1);
+                int edad = cursorEstudiantes.getInt(2);
+                String ciclo = cursorEstudiantes.getString(3);
+                String curso = cursorEstudiantes.getString(4);
+                String despacho = cursorEstudiantes.getString(5);
+
+                Profesor nuevo = new Profesor(nombre,edad,ciclo,curso,despacho);
+                todosEstudiantes.add(nuevo);
+            } while (cursorEstudiantes.moveToNext());
+        }
+
+        return todosEstudiantes;
     }
 
     public void eliminarEstudiante(int id){

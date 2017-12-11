@@ -60,4 +60,8 @@ public class Profesor {
     public void setDespacho(String despacho) {
         this.despacho = despacho;
     }
+
+    public String getEdadString(){
+        return String.valueOf(this.edad);
+    }
 }

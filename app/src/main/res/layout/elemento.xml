@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -53,6 +54,18 @@
             android:text="Curso"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
+        <TextView
+            android:id="@+id/txtEDespacho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="Despacho"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <TextView
@@ -67,7 +80,7 @@
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/miniatura"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
