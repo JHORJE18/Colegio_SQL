@@ -11,12 +11,8 @@ import java.util.ArrayList;
 
 public class MostrarRegistrosActivity extends AppCompatActivity {
 
-    //Variables
-    ArrayList<Estudiante> estudiantes;
-    ArrayList<Profesor> profesores;
-    RecyclerView rv;
-    RecyclerView.LayoutManager rvLM;
-
+    //TODO https://androidstudiofaqs.com/tutoriales/adapter-personalizado-en-android
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
