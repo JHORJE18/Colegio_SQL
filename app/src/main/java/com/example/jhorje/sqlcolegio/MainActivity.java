@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent ventanaEliminar = new Intent(this, EliminarCampoActivity.class);
                 startActivity(ventanaEliminar);
                 break;
+            case R.id.btnRegistros:
+                Intent ventanaRegistros = new Intent(this, MostrarRegistrosActivity.class);
+                startActivity(ventanaRegistros);
+                break;
         }
     }
 
