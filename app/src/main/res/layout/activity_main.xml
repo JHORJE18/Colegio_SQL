@@ -93,4 +93,12 @@
             android:textSize="20sp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/txtCreditos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Aplicación realizada por Jorge López Gil"
+        android:textAlignment="textEnd" />
+
 </LinearLayout>
