@@ -78,6 +78,15 @@
                 android:ems="10"
                 android:hint="Nota media:"
                 android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/editHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Hora:"
+                android:inputType="time"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -109,6 +118,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Profesor"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/rbNuevaAsignatura"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Asignatura"
                     android:textAlignment="textStart"
                     android:textSize="20sp" />
             </RadioGroup>

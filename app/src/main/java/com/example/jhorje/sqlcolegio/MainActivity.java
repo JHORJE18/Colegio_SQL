@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     //Variables
     public MyDBAdapter dbAdapter;
     Button btnNuevo, btnRecargar, btnEliminar;
-    TextView txtCountEstudiantes, txtCountProfesores;
+    TextView txtCountEstudiantes, txtCountProfesores, txtCountAsignaturas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         btnEliminar = (Button) findViewById(R.id.btnEliminar);
         txtCountEstudiantes = (TextView) findViewById(R.id.txtCountEstudiantes);
         txtCountProfesores = (TextView) findViewById(R.id.txtCountProfesores);
+        txtCountAsignaturas = (TextView) findViewById(R.id.txtCountAsignaturas);
 
         //Cargamos Base de datos SQLite
         dbAdapter = new MyDBAdapter(this);
@@ -77,5 +78,12 @@ public class MainActivity extends AppCompatActivity {
             Log.w("#TEMP","Error primo!");
         }
         txtCountProfesores.setText("Profesores: " + profesores);
+        int asignaturas = 0;
+        try {
+            asignaturas = dbAdapter.contarRegistrosAsignaturas();
+        }catch (Exception e){
+            Log.w("#TEMP","Error primo!");
+        }
+        txtCountAsignaturas.setText("Asignaturas: " + asignaturas);
     }
 }

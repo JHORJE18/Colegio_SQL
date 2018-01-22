@@ -91,6 +91,15 @@
             android:layout_marginRight="20dp"
             android:text="Estudiantes: 0"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtCountAsignaturas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Asignaturas: 0"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <TextView

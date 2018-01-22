@@ -26,8 +26,12 @@ public class EliminarCampoActivity extends AppCompatActivity {
     Button btnBorrar;
     TextView txtTitulo;
     RadioGroup radioGroup;
-    RadioButton rbEstudiante, rbProfesor;
-    boolean estudiante;
+    RadioButton rbEstudiante, rbProfesor, rbAsignatura;
+    int elimina;        /* Para referenciar a que dato eliminar
+                            1 = Estudiante
+                            2 = Profesor
+                            3 = Asignatura
+                        */
     boolean todo;
     CheckBox cbBorrarTODO;
 
@@ -43,8 +47,9 @@ public class EliminarCampoActivity extends AppCompatActivity {
         rbEstudiante = (RadioButton) findViewById(R.id.rbEliminarEstudiante);
         rbProfesor = (RadioButton) findViewById(R.id.rbEliminarProfesor);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroupEliminar);
+        rbAsignatura = (RadioButton) findViewById(R.id.rbEliminarAsignatura);
         cbBorrarTODO = (CheckBox) findViewById(R.id.cbBorrarTodo);
-        estudiante = true;
+        elimina = 1;
         todo = false;
 
         //Cargamos Base de datos SQLite
@@ -55,10 +60,12 @@ public class EliminarCampoActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if (rbProfesor.isChecked()){
-                    estudiante = false;
-                } else {
-                    estudiante = true;
+                if (rbEstudiante.isChecked()){
+                    elimina = 1;
+                } else if (rbProfesor.isChecked()) {
+                    elimina = 2;
+                } else if (rbAsignatura.isChecked()){
+                    elimina = 3;
                 }
 
                 refrescarVista();
@@ -87,10 +94,16 @@ public class EliminarCampoActivity extends AppCompatActivity {
                 if (todo){
                     borrarTODO();
                 } else {
-                    if (estudiante) {
-                        borrarEstudiante();
-                    } else {
-                        borrarProfesor();
+                    switch (elimina){
+                        case 1:
+                            borrarEstudiante();
+                            break;
+                        case 2:
+                            borrarProfesor();
+                            break;
+                        case 3:
+                            borrarAsignatura();
+                            break;
                     }
                 }
                 break;
@@ -105,10 +118,16 @@ public class EliminarCampoActivity extends AppCompatActivity {
             editID.setVisibility(View.GONE);
         } else {
             //Estudiante / Profesor
-            if (estudiante) {
-                txtTitulo.setText("Eliminar Estudiante");
-            } else {
-                txtTitulo.setText("Eliminar Profesor");
+            switch (elimina){
+                case 1:
+                    txtTitulo.setText("Eliminar Estudiante");
+                    break;
+                case 2:
+                    txtTitulo.setText("Eliminar Profesor");
+                    break;
+                case 3:
+                    txtTitulo.setText("Eliminar Asignatura");
+                    break;
             }
             radioGroup.setVisibility(View.VISIBLE);
             editID.setVisibility(View.VISIBLE);
@@ -125,6 +144,12 @@ public class EliminarCampoActivity extends AppCompatActivity {
         dbAdapter.eliminarProfesor(Integer.parseInt(editID.getText().toString()));
 
         Toast.makeText(getApplicationContext(),"Profesor eliminado",Toast.LENGTH_LONG).show();
+    }
+
+    private void borrarAsignatura(){
+        dbAdapter.eliminarAsignatura(Integer.parseInt(editID.getText().toString()));
+
+        Toast.makeText(this, "Asignatura eliminada", Toast.LENGTH_SHORT).show();
     }
 
     private void borrarTODO(){
