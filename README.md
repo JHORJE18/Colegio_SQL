@@ -1,4 +1,4 @@
-# SQL Colegio
+# Colegio_SQL
 Aplicación Android para almacenar a alumnos, profesores y asignaturas en la Base de Datos interna del dispositivo mediando SQLite.
 
 ## Funciones
