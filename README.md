@@ -1,5 +1,5 @@
-# Conexion_SQL
-Aplicación para almacenar a alumnos, profesores y asignaturas en la Base de Datos interna del dispositivo mediando SQL_Lite
+# SQL Colegio
+Aplicación Android para almacenar a alumnos, profesores y asignaturas en la Base de Datos interna del dispositivo mediando SQLite.
 
 ## Funciones
 1. Añadir Estudiantes
